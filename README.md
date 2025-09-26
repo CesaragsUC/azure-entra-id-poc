@@ -12,7 +12,7 @@ This project implements a complete authentication and authorization system using
 
 ![Azure AD Authentication Flow](https://img.shields.io/badge/Authentication-Azure%20AD-blue?style=flat-square&logo=microsoft)
 ![Authorization](https://img.shields.io/badge/Authorization-Role%20Based-green?style=flat-square)
-![Framework](https://img.shields.io/badge/Framework-ASP.NET%20Core%208-purple?style=flat-square&logo=dotnet)
+![Framework](https://img.shields.io/badge/Framework-ASP.NET%20Core%209-purple?style=flat-square&logo=dotnet)
 
 ## ✨ Features
 
