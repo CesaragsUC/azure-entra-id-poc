@@ -30,7 +30,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
-                        <!-- vai repetir o menu. somente para testar com perfil sem acesso admin, deve dar acesso negado -->
+                        <!-- This will repeat the Admin menu. This is only for testing with a profile without admin access, it should give access denied -->
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin Teste</a>
                         </li>
@@ -42,7 +42,7 @@
                             </li>
                         }
 
-                        <!-- Só mostrar se for Director ou Admin -->
+                        <!-- Only show if you are Director or Admin -->
                         @if (User.Identity.IsAuthenticated && roleService != null && roleService.UserHasRole(User, "Director", "AppAdmin"))
                         {
                             <li class="nav-item">
@@ -50,7 +50,7 @@
                             </li>
                         }
 
-                        <!-- Só mostrar se for Manager,Director ou Admin -->
+                        <!-- Only show if you are Manager, Director or Admin -->
                         @if (User.Identity.IsAuthenticated && roleService != null && roleService.UserHasRole(User, "Manager", "Director", "AppAdmin"))
                         {
                             <li class="nav-item">
@@ -59,7 +59,7 @@
                         }
 
 
-                        <!-- Só mostrar se tiver qualquer role válida -->
+                        <!-- Only show if you have any valid role-->
                         @if (User.Identity.IsAuthenticated && roleService != null && roleService.UserHasRole(User, "Employee", "Manager", "Director", "AppAdmin"))
                         {
                             <li class="nav-item">
