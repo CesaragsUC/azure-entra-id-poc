@@ -46,7 +46,6 @@ public class UserAzureAD
         {
             if (groupMappings.ContainsKey(groupClaim.Value))
             {
-                // Adiciona claim de role com nome amigável
                 identity.AddClaim(new Claim(ClaimTypes.Role, groupMappings[groupClaim.Value]));
             }
         }
