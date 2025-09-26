@@ -16,7 +16,7 @@
         <h4> Azure AD Email: @getUser.user_email </h4>
         <h4> Azure AD User domain: @getUser.user_domain</h4>
 
-        <h3>Grupos de acessos:</h3>
+        <h3>Access Groups:</h3>
         @if (ViewBag.UserGroupNames != null && ((List<string>)ViewBag.UserGroupNames).Any())
         {
             <ul>
@@ -28,7 +28,7 @@
         }
         else
         {
-            <p>Nenhum grupo encontrado nas claims</p>
+            <p>No groups found in claims</p>
         }
 
     }
