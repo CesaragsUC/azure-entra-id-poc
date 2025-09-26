@@ -24,7 +24,7 @@ builder.Services.AddControllersWithViews(options =>
 });
 
 
-
+//Azure Entra ID, returns the access groups ID instead of the names. This can be improved and these IDs can be stored in a keyvault or something similar, use your creativity ;)
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy =>
@@ -76,7 +76,7 @@ app.UseRouting();
 app.UseAuthentication();// added this
 app.UseAuthorization();
 
-//tem q ser depois do UseAuthorization
+//It has to be after UseAuthorization
 app.UseMiddleware<AccessDeniedMiddleware>();
 
 app.MapStaticAssets();
