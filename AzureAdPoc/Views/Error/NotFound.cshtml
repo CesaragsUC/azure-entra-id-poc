@@ -1,0 +1,398 @@
+﻿@{
+    ViewData["Title"] = "404 - Página Não Encontrada";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #74b9ff 0%, #0984e3 50%, #6c5ce7 100%);
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle 2s infinite alternate;
+    }
+
+    @@keyframes twinkle {
+        0% {
+            opacity: 0.3;
+            transform: scale(1);
+        }
+
+        100% {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+    }
+
+    .error-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .error-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 25px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        max-width: 650px;
+        width: 100%;
+        overflow: hidden;
+        animation: floatIn 1s ease-out;
+    }
+
+    @@keyframes floatIn {
+        from {
+            transform: translateY(50px) scale(0.9);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+    }
+
+    .error-header {
+        background: linear-gradient(135deg, #00cec9, #55a3ff, #a29bfe);
+        color: white;
+        padding: 40px 30px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .astronaut {
+        font-size: 5rem;
+        margin-bottom: 20px;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @@keyframes float {
+        0%, 100% {
+            transform: translateY(0) rotate(-5deg);
+        }
+
+        50% {
+            transform: translateY(-10px) rotate(5deg);
+        }
+    }
+
+    .error-code {
+        font-size: 4rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .search-section {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .search-input {
+        border: 2px solid #74b9ff;
+        border-radius: 25px;
+        padding: 12px 20px;
+        font-size: 1rem;
+        width: 100%;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+        .search-input:focus {
+            border-color: #0984e3;
+            box-shadow: 0 0 0 3px rgba(116, 185, 255, 0.2);
+        }
+
+    .search-btn {
+        background: linear-gradient(135deg, #74b9ff, #0984e3);
+        border: none;
+        border-radius: 25px;
+        padding: 12px 25px;
+        color: white;
+        font-weight: 500;
+        margin-top: 10px;
+        transition: all 0.3s ease;
+    }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+
+    .btn-custom {
+        background: linear-gradient(135deg, #00cec9, #55a3ff);
+        border: none;
+        border-radius: 25px;
+        padding: 12px 30px;
+        color: white;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-block;
+        margin: 5px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+
+    .btn-secondary-custom {
+        background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+    }
+
+    .helpful-links {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+    }
+
+        .helpful-links a {
+            color: #0984e3;
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+        }
+
+            .helpful-links a:hover {
+                color: #74b9ff;
+                padding-left: 10px;
+                text-decoration: none;
+            }
+
+    .planet {
+        position: fixed;
+        border-radius: 50%;
+        opacity: 0.1;
+        z-index: 2;
+    }
+
+    .planet1 {
+        width: 60px;
+        height: 60px;
+        background: #ff7675;
+        top: 10%;
+        right: 10%;
+        animation: orbit1 20s linear infinite;
+    }
+
+    .planet2 {
+        width: 40px;
+        height: 40px;
+        background: #fdcb6e;
+        bottom: 20%;
+        left: 5%;
+        animation: orbit2 15s linear infinite;
+    }
+
+    @@keyframes orbit1 {
+        0% {
+            transform: rotate(0deg) translateX(50px) rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg) translateX(50px) rotate(-360deg);
+        }
+    }
+
+    @@keyframes orbit2 {
+        0% {
+            transform: rotate(0deg) translateX(50px) rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(-360deg) translateX(50px) rotate(360deg);
+        }
+    }
+</style>
+
+<!-- Estrelas de fundo -->
+<div class="stars" id="stars"></div>
+
+<!-- Planetas decorativos -->
+<div class="planet planet1"></div>
+<div class="planet planet2"></div>
+
+<div class="error-container">
+    <div class="error-card">
+        <div class="error-header">
+            <div class="astronaut">
+                <i class="fas fa-user-astronaut"></i>
+            </div>
+            <div class="error-code">404</div>
+            <h1 class="h3">Página Não Encontrada</h1>
+            <p class="mb-0">Houston, temos um problema!</p>
+        </div>
+
+        <div class="p-4">
+            <div class="text-center mb-4">
+                <h5>Ops! Você se perdeu no espaço digital</h5>
+                <p class="text-muted">
+                    A página que você está procurando foi para uma galáxia muito, muito distante.
+                </p>
+            </div>
+
+            <div class="search-section">
+                <h6><i class="fas fa-search text-primary"></i> Tente Procurar</h6>
+                <input type="text" class="search-input" placeholder="Digite o que você está procurando..." id="searchInput">
+                <button class="search-btn btn w-100" onclick="performSearch()">
+                    <i class="fas fa-rocket"></i> Buscar no Site
+                </button>
+            </div>
+
+            <div class="helpful-links">
+                <h6><i class="fas fa-compass text-info"></i> Links Úteis</h6>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i> Página Inicial</a>
+                        <a href="@Url.Action("About", "Home")"><i class="fas fa-info-circle"></i> Sobre Nós</a>
+                        <a href="@Url.Action("Contact", "Home")"><i class="fas fa-envelope"></i> Contato</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="#"><i class="fas fa-shopping-bag"></i> Produtos</a>
+                        <a href="#"><i class="fas fa-cogs"></i> Serviços</a>
+                        <a href="#"><i class="fas fa-question-circle"></i> Ajuda</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="@Url.Action("Index", "Home")" class="btn btn-custom">
+                    <i class="fas fa-home"></i> Voltar ao Início
+                </a>
+                <button onclick="history.back()" class="btn btn-secondary-custom">
+                    <i class="fas fa-arrow-left"></i> Página Anterior
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-light p-3 border-top">
+            <div class="row small text-muted">
+                <div class="col-md-6">
+                    <strong>URL Solicitada:</strong><br>
+                    <span class="text-break">@Context.Request.Path@Context.Request.QueryString</span>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <strong>Horário:</strong><br>
+                    @DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")
+                </div>
+            </div>
+            <hr class="my-2">
+            <p class="mb-0 text-center">
+                <i class="fas fa-lightbulb text-warning"></i>
+                <strong>Dica:</strong> Verifique se a URL está correta ou use a busca acima.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Criar estrelas aleatórias
+    function createStars() {
+        const starsContainer = document.getElementById('stars');
+        const numStars = 50; // Reduzido para melhor performance
+
+        for (let i = 0; i < numStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = Math.random() * 3 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.animationDelay = Math.random() * 2 + 's';
+            star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            starsContainer.appendChild(star);
+        }
+    }
+
+    // Função de busca
+    function performSearch() {
+        const searchTerm = document.getElementById('searchInput').value;
+        if (searchTerm.trim()) {
+            // Redirecionar para página de busca ou página inicial com parâmetro
+            window.location.href = '@Url.Action("Index", "Home")' + '?search=' + encodeURIComponent(searchTerm);
+        }
+    }
+
+    // Permitir busca com Enter
+    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            performSearch();
+        }
+    });
+
+    // Inicializar quando a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+        createStars();
+
+        // Focar no campo de busca
+        setTimeout(function() {
+            document.getElementById('searchInput').focus();
+        }, 1000);
+    });
+
+    // Efeito de meteoro simples
+    function createMeteor() {
+        const meteor = document.createElement('div');
+        meteor.style.position = 'fixed';
+        meteor.style.width = '2px';
+        meteor.style.height = '80px';
+        meteor.style.background = 'linear-gradient(to bottom, transparent, white, transparent)';
+        meteor.style.right = '0';
+        meteor.style.top = Math.random() * 50 + '%';
+        meteor.style.pointerEvents = 'none';
+        meteor.style.zIndex = '5';
+        meteor.style.transform = 'rotate(45deg)';
+
+        document.body.appendChild(meteor);
+
+        let position = 0;
+        const animate = () => {
+            position += 8;
+            meteor.style.right = position + 'px';
+            meteor.style.top = (parseInt(meteor.style.top) + 4) + 'px';
+
+            if (position > window.innerWidth + 100) {
+                meteor.remove();
+            } else {
+                requestAnimationFrame(animate);
+            }
+        };
+
+        animate();
+    }
+
+    // Criar meteoro ocasionalmente
+    setInterval(() => {
+        if (Math.random() < 0.3) {
+            createMeteor();
+        }
+    }, 4000);
+</script>

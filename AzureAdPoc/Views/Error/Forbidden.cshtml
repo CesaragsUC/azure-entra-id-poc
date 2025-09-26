@@ -1,0 +1,195 @@
+﻿@{
+    ViewData["Title"] = "403 - Acesso Negado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+    }
+
+    .error-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .error-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        overflow: hidden;
+        animation: slideUp 0.8s ease-out;
+    }
+
+    @@keyframes slideUp {
+        from {
+            transform: translateY(30px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .error-header {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        color: white;
+        padding: 40px 30px;
+        text-align: center;
+    }
+
+    .error-icon {
+        font-size: 4rem;
+        margin-bottom: 15px;
+        animation: pulse 2s infinite;
+    }
+
+    @@keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.1);
+        }
+    }
+
+    .error-code {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .btn-custom {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border: none;
+        border-radius: 25px;
+        padding: 12px 30px;
+        color: white;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-block;
+        margin: 5px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+
+    .btn-secondary-custom {
+        background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+    }
+
+    .error-details {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+        border-left: 4px solid #ff6b6b;
+    }
+</style>
+
+<div class="error-container">
+    <div class="error-card">
+        <div class="error-header">
+            <i class="fas fa-shield-alt error-icon"></i>
+            <div class="error-code">403</div>
+            <h1 class="h3">Acesso Negado</h1>
+            <p class="mb-0">Você não tem permissão para acessar esta página</p>
+        </div>
+
+        <div class="p-4 text-center">
+            <div class="mb-4">
+                <h5>Oops! Área Restrita</h5>
+                <p class="text-muted">
+                    Esta página requer privilégios especiais de acesso.<br>
+                    Entre em contato com o administrador se você acredita que deveria ter acesso.
+                </p>
+            </div>
+
+            <div class="error-details text-start">
+                <h6><i class="fas fa-info-circle text-primary"></i> Informações do Erro</h6>
+                <div class="row small">
+                    <div class="col-sm-4"><strong>Código:</strong></div>
+                    <div class="col-sm-8">403 Forbidden</div>
+                    <div class="col-sm-4"><strong>Usuário:</strong></div>
+                    <div class="col-sm-8">@(User.Identity?.Name ?? "Não identificado")</div>
+                    <div class="col-sm-4"><strong>Horário:</strong></div>
+                    <div class="col-sm-8">@DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")</div>
+                    <div class="col-sm-4"><strong>URL:</strong></div>
+                    <div class="col-sm-8 text-break">@Context.Request.Path</div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <a href="@Url.Action("Index", "Home")" class="btn btn-custom">
+                    <i class="fas fa-home"></i> Voltar ao Início
+                </a>
+                <button onclick="history.back()" class="btn btn-secondary-custom">
+                    <i class="fas fa-arrow-left"></i> Página Anterior
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-light p-3 text-center border-top">
+            <small class="text-muted">
+                <i class="fas fa-question-circle"></i>
+                <strong>Precisa de ajuda?</strong><br>
+                Entre em contato com o suporte técnico ou administrador do sistema.
+            </small>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Adicionar efeito de partículas simples
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.querySelector('.error-container');
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'absolute';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = window.innerHeight + 'px';
+            particle.style.zIndex = '1';
+
+            document.body.appendChild(particle);
+
+            // Mover partícula para cima
+            let position = window.innerHeight;
+            const speed = Math.random() * 2 + 1;
+
+            const animate = () => {
+                position -= speed;
+                particle.style.top = position + 'px';
+
+                if (position < -10) {
+                    particle.remove();
+                } else {
+                    requestAnimationFrame(animate);
+                }
+            };
+
+            animate();
+        }
+
+        // Criar partícula a cada 500ms
+        setInterval(createParticle, 500);
+    });
+</script>

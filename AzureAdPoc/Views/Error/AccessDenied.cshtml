@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Acesso Negado";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        @ViewBag.ErrorTitle
+                    </h4>
+                </div>
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-lock fa-5x text-danger"></i>
+                    </div>
+                    <h5 class="card-title">@ViewBag.ErrorMessage</h5>
+                    <p class="card-text">
+                        Entre em contato com o administrador do sistema se você acredita que deveria ter acesso a esta área.
+                    </p>
+                    <div class="mt-4">
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">
+                            <i class="fas fa-home"></i> Voltar ao Início
+                        </a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="@Url.Action("SignOut", "Account", new { area = "MicrosoftIdentity" })" class="btn btn-secondary">
+                                <i class="fas fa-sign-out-alt"></i> Sair
+                            </a>
+                        }
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <small>
+                        <strong>Usuário:</strong> @(User.Identity.IsAuthenticated? User.Identity.Name : "Não autenticado")<br />
+                        <strong>Horário:</strong> @DateTime.Now.ToString("dd/MM/yyyy HH:mm")
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
