@@ -20,7 +20,6 @@ public class AccessDeniedMiddleware
             context.Response.Redirect("/Error/AccessDenied");
         }
 
-        // Tratar status codes específicos
         if (context.Response.StatusCode == 401)
         {
             context.Response.Redirect("/Error/Forbidden");
