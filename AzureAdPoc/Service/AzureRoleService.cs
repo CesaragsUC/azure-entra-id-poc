@@ -17,10 +17,10 @@ public class AzureRoleService : IAzureRoleService
 {
     private readonly Dictionary<string, string> _roleToGroupMapping = new()
     {
-            { "AppAdmin", "21cb50d1-dc09-47cb-9e83-82eee22242b0" },
-            { "Manager", "1a19dcdb-86e3-4b54-a427-82f833cbca2e" },
-            { "Director", "22f33b8e-2f00-48db-aae8-f27623a1b1df" },
-            { "Employee", "dcf6845c-333e-4c4d-baa7-fad776917de2" }
+        { "AppAdmin", "your-appadmin-group-id" },
+        { "Manager", "your-manager-group-id" },
+        { "Director", "your-director-group-id" },
+        { "Employee", "your-employee-group-id" }
     };
 
 
