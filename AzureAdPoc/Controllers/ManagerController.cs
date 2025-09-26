@@ -21,10 +21,10 @@ public class ManagerController : Controller
     {
         var groupMappings = new Dictionary<string, string>
         {
-            { "21cb50d1-dc09-47cb-9e83-82eee22242b0", "AppAdmin" },
-            { "1a19dcdb-86e3-4b54-a427-82f833cbca2e", "Manager" },
-            { "22f33b8e-2f00-48db-aae8-f27623a1b1df", "Director" },
-            { "dcf6845c-333e-4c4d-baa7-fad776917de2", "Employee" }
+            { "your-appadmin-group-id" , "AppAdmin" },
+            { "your-manager-group-id", "Manager" },
+            { "your-director-group-id", "Director" },
+            { "your-employee-group-id", "Employee" }
         };
 
         var groupClaims = User.Claims.Where(c => c.Type == "groups").Select(c => c.Value).ToList();
