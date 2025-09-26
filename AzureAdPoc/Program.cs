@@ -29,16 +29,16 @@ builder.Services.AddControllersWithViews(options =>
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy =>
-        policy.RequireClaim("groups", "21cb50d1-dc09-47cb-9e83-82eee22242b0"));
+        policy.RequireClaim("groups", "your-appadmin-group-id"));
 
     options.AddPolicy("ManagerOrAdmin", policy =>
-        policy.RequireClaim("groups", "21cb50d1-dc09-47cb-9e83-82eee22242b0", "1a19dcdb-86e3-4b54-a427-82f833cbca2e"));
+        policy.RequireClaim("groups", "your-appadmin-group-id", "your-manager-group-id", "your-director-group-id"));
 
     options.AddPolicy("DirectorOnly", policy =>
-        policy.RequireClaim("groups", "21cb50d1-dc09-47cb-9e83-82eee22242b0", "22f33b8e-2f00-48db-aae8-f27623a1b1df"));
+        policy.RequireClaim("groups", "your-appadmin-group-id", "your-director-group-id"));
 
     options.AddPolicy("EmployeeAccess", policy =>
-        policy.RequireClaim("groups", "dcf6845c-333e-4c4d-baa7-fad776917de2", "22f33b8e-2f00-48db-aae8-f27623a1b1df", "1a19dcdb-86e3-4b54-a427-82f833cbca2e", "21cb50d1-dc09-47cb-9e83-82eee22242b0"));
+        policy.RequireClaim("groups", "our-employee-group-id", "your-director-group-id", "your-manager-group-id", "your-appadmin-group-id"));
 });
 
 
