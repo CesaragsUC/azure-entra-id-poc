@@ -1,11 +1,10 @@
 ﻿using AzureAdPoc.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System.Net;
 
 namespace AzureAdPoc.Attributes;
 
-// Filtro genérico base
+// Generic base filter
 public class RoleAccessFilterAttribute : Attribute, IActionFilter
 {
     private readonly IAzureRoleService _azureRoleService;
@@ -25,7 +24,7 @@ public class RoleAccessFilterAttribute : Attribute, IActionFilter
 
         if (!user.Identity.IsAuthenticated)
         {
-            // Redirecionar para login
+            // Redirect to login
             context.Result = new ChallengeResult();
             return;
         }
@@ -33,14 +32,14 @@ public class RoleAccessFilterAttribute : Attribute, IActionFilter
         if (!_azureRoleService.UserHasRole(user, AllowedRoles))
         {
             //context.Result = new ForbidResult();
-            // OU definir o status code antes do redirect:
+            // OR set the status code before the redirect:
             context.HttpContext.Response.StatusCode = 403;
            context.Result = new RedirectToActionResult("AccessDenied", "Error", null);
         }
     }
 }
 
-// Filtros específicos que herdam do genérico
+// Specific filters that inherit from the generic
 public class AdminAccessFilterAttribute : RoleAccessFilterAttribute
 {
     public AdminAccessFilterAttribute(IAzureRoleService azureRoleService)

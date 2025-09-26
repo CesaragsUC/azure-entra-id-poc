@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
-using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,22 +23,8 @@ builder.Services.AddControllersWithViews(options =>
     options.Filters.Add(new AuthorizeFilter(policy));
 });
 
-
-//Azure Entra ID, returns the access groups ID instead of the names. This can be improved and these IDs can be stored in a keyvault or something similar, use your creativity ;)
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("AdminOnly", policy =>
-        policy.RequireClaim("groups", "your-appadmin-group-id"));
-
-    options.AddPolicy("ManagerOrAdmin", policy =>
-        policy.RequireClaim("groups", "your-appadmin-group-id", "your-manager-group-id", "your-director-group-id"));
-
-    options.AddPolicy("DirectorOnly", policy =>
-        policy.RequireClaim("groups", "your-appadmin-group-id", "your-director-group-id"));
-
-    options.AddPolicy("EmployeeAccess", policy =>
-        policy.RequireClaim("groups", "our-employee-group-id", "your-director-group-id", "your-manager-group-id", "your-appadmin-group-id"));
-});
+// added this
+builder.Services.AddAuthorization();
 
 
 // added this
@@ -58,6 +43,11 @@ builder.Services.AddScoped<AdminAccessFilterAttribute>();
 builder.Services.AddScoped<ManagerAccessFilterAttribute>();
 builder.Services.AddScoped<DirectorAccessFilterAttribute>();
 builder.Services.AddScoped<EmployeeAccessFilterAttribute>();
+builder.Services.AddScoped<RoleAccessFilterAttribute>(serviceProvider =>
+{
+    var azureRoleService = serviceProvider.GetRequiredService<IAzureRoleService>();
+    return new RoleAccessFilterAttribute(azureRoleService, "Default");
+});
 
 var app = builder.Build();
 
