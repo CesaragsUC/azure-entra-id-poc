@@ -53,14 +53,7 @@ public class AzureRoleService : IAzureRoleService
         // Debug
         Console.WriteLine($"Checking role: {roleName}");
 
-        // Verificar claims de role primeiro
-        if (user.IsInRole(roleName))
-        {
-            Console.WriteLine($"Found role claim for: {roleName}");
-            return true;
-        }
-
-        // Verificar grupos
+        // Verify groups
         if (_roleToGroupMapping.ContainsKey(roleName))
         {
             var groupId = _roleToGroupMapping[roleName];
@@ -69,7 +62,7 @@ public class AzureRoleService : IAzureRoleService
             var hasGroup = user.Claims.Any(c => c.Type == "groups" && c.Value == groupId);
             Console.WriteLine($"Has group {groupId}: {hasGroup}");
 
-            // Debug: listar todos os grupos
+            // Debug:  list all groups
             var allGroups = user.Claims.Where(c => c.Type == "groups").Select(c => c.Value);
             Console.WriteLine($"All user groups: {string.Join(", ", allGroups)}");
 
