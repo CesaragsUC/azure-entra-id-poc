@@ -1,6 +1,7 @@
 
 // helpful: https://medium.com/@kagamimendoza/how-to-integrate-azure-active-directory-with-your-asp-net-core-project-24c1e9451243
 // doc: https://learn.microsoft.com/en-us/entra/identity-platform/tutorial-web-app-dotnet-prepare-app?tabs=workforce-tenant
+// also: https://learn.microsoft.com/en-us/entra/fundamentals/what-is-entra
 
 using AzureAdPoc.Attributes;
 using AzureAdPoc.Middleware;
