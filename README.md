@@ -1,7 +1,7 @@
 # Azure AD Authentication & Authorization POC
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![.NET](https://img.shields.io/badge/.NET-8.0-blue)](https://dotnet.microsoft.com/)
+[![.NET](https://img.shields.io/badge/.NET-9.0-blue)](https://dotnet.microsoft.com/)
 [![Azure AD](https://img.shields.io/badge/Authentication-Azure%20AD-blue)](https://azure.microsoft.com/en-us/services/active-directory/)
 
 A **Proof of Concept (POC)** demonstrating role-based access control using **Azure Active Directory (Azure AD/Entra ID)** integration with **ASP.NET Core MVC**.
